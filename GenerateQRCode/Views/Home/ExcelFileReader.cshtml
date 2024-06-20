@@ -1,0 +1,78 @@
+﻿@model GenerateQRCode.Models.QRCodeModel
+@{
+    ViewData["Title"] = "ExcelGenerateQRCode";
+}
+
+﻿<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="form-group col-6 pb-2">
+            <label class="form-label">Select File</label>
+            <input class="form-control" required type="file" name="file" />
+        </div>
+        <div class="form-group col-6 pb-2">
+            <label class="form-label">Select Size</label>
+            <select asp-for="Size" class="form-select col-4" id="Size" name="Size" aria-label="Default select example">
+                <option value="1" selected>1 (29x29)px</option>
+                <option value="2">2 (58x58)px</option>
+                <option value="3">3 (87x87)px</option>
+                <option value="4">4 (116x116)px</option>
+                <option value="5">5 (145x145)px</option>
+                <option value="6">6 (174x174)px</option>
+                <option value="7">7 (203x203)px</option>
+                <option value="8">8 (232x232)px</option>
+                <option value="9">9 (261x261)px</option>
+                <option value="10">10 (290x290)px</option>
+            </select>
+        </div>
+        <div class="form-group pb-2">
+            <div class="col-3">
+                <input type="submit" asp-controller="Home" asp-action="ExcelFileReader" class="btn btn-dark" value="Upload Excel File" />
+            </div>
+        </div>
+    </div>
+    @* <div class="row" style="padding-top: 10px;">
+        <div class="col-3">
+            <input type="submit" asp-controller="Home" asp-action="ExcelFileReader" class="btn btn-dark" value="Upload Excel File" />
+        </div>
+    </div> *@
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            @if (ViewBag.ExcelData != null && ViewBag.ExcelData.Count > 0)
+            {
+                @foreach (var header in ViewBag.ExcelData[0])
+                {
+                    <th>@header</th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @* @if (ViewBag.ExcelData != null && ViewBag.ExcelData.Count > 1)
+        {
+            @for (int i = 1; i < ViewBag.ExcelData.Count; i++)
+            {
+                <tr>
+                    @foreach (var cell in ViewBag.ExcelData[i])
+                    {
+                        <td>@cell</td>
+                    }
+                </tr>
+            }
+        } *@
+        @if (ViewBag.ResQRCode != null && ViewBag.ResQRCode.Count > 0)
+        {
+            @foreach (var item in ViewBag.ResQRCode)
+            {
+                <tr>
+                    <td class="text-center">
+                        <img src="@item.QrCodeUri" alt="@item.QrCodeName" class="img-thumbnail" />
+                        <span>@item.QrCodeName</span>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

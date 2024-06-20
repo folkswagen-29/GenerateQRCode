@@ -1,0 +1,31 @@
+﻿@model GenerateQRCode.Models.QRCodeModel
+
+@{
+    ViewData["Title"] = "GenQRCode";
+}
+<hr />
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form asp-action="CreateQRCode">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group pb-2">
+                <label asp-for="QRCodeText" class="control-label"></label>
+                <input asp-for="QRCodeText" class="form-control" />
+                <span asp-validation-for="QRCodeText" class="text-danger"></span>
+            </div>
+            <div class="form-group pb-2">
+                <input type="submit" value="Generate QR Code" class="btn btn-primary text-center" />
+            </div>
+            <div class="form-group text-center pb-2">
+
+                <img src="@ViewBag.QrCodeUri" alt="@ViewBag.QrCodeTag" class="img-thumbnail" />
+                <div class="text-center">@ViewBag.QrCodeTag</div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
