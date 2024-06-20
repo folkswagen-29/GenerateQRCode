@@ -135,14 +135,6 @@ namespace GenerateQRCode.Controllers
                     }
                 }
             }
-            //QRCodeGenerator QrGenerator = new QRCodeGenerator();
-            //QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(qRCode.QRCodeText, QRCodeGenerator.ECCLevel.Q);
-            //QRCode QrCode = new QRCode(QrCodeInfo);
-            //Bitmap QrBitmap = QrCode.GetGraphic(10);
-            //byte[] BitmapArray = QrBitmap.BitmapToByteArray();
-            //string QrUri = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
-            //ViewBag.QrCodeUri = QrUri;
-            //ViewBag.QrCodeTag = qRCode.QRCodeText;
 
             return res;
         }
